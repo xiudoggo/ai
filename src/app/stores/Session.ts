@@ -27,6 +27,7 @@ export interface SessionState {
     loadSessions: () => void;
     addSession: (mask: Mask) => void;
     removeSession: (id: string) => void;
+    updateSessionName: (id: string, newName: string) => void;
     setCurrentSession: (id: string | null) => void;
     addMessage: (message: ChatMessage, sessionId: string, UpdateTime: string) => void;
     loadMessages: (id: string) => void;
@@ -122,23 +123,47 @@ export const useSessionStore = create<SessionState>()(
             },
             removeSession: async (id: string) => {
                 await fetch(`http://localhost:8080/session/delete?id=${id}`, {
-                    method: "post"
+                    method: "POST"
                 })
-                    .then((res) => {
-                        return res.text();
-                    })
+                    .then((res) => res.text())
                     .then((result) => {
                         if (result === "Deleted") {
                             console.log("Session deleted successfully");
-
                         } else {
                             console.error("Failed to delete session");
                             return;
                         }
                         set((state) => ({
                             LocalSessions: state.LocalSessions.filter((session) => session.id !== id)
-
-                        }))
+                        }));
+                    })
+                    .catch((e) => {
+                        console.error("Failed to delete session:", e);
+                    });
+            },
+            
+            updateSessionName: async (id: string, newName: string) => {
+                await fetch(`http://localhost:8080/session/update?id=${id}&name=${newName}`, {
+                    method: "POST"
+                })
+                    .then((res) => res.text())
+                    .then((result) => {
+                        if (result === "Updated") {
+                            console.log("Session updated successfully");
+                            // 更新本地状态，确保界面能够正确刷新
+                            set((state) => ({
+                                LocalSessions: state.LocalSessions.map((session) => 
+                                    session.id === id 
+                                        ? { ...session, topic: newName }
+                                        : session
+                                )
+                            }));
+                        } else {
+                            console.error("Failed to update session");
+                        }
+                    })
+                    .catch((e) => {
+                        console.error("Error updating session:", e);
                     })
             },
             setCurrentSession(id) {

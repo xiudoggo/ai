@@ -78,6 +78,7 @@
   margin-bottom: 8px;
   display: flex;
   justify-content:space-between;
+  align-items: center;
 }
 
 .info {
@@ -87,22 +88,138 @@
   opacity: 0.8;
 }
 
-.deleteIcon {
-  display: none;
-  color: rgba(255, 255, 255, 0.7);
+.actions {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transform: scale(0.8);
   transition: all 0.3s ease;
-  width: 20px;
-  height: 20px;
 }
 
-.chatItem:hover .deleteIcon {
+.chatItem:hover .actions {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.editIcon {
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(76, 175, 80, 0.2);
   display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.editIcon:hover {
+  background: rgba(76, 175, 80, 0.8);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.deleteIcon {
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 82, 82, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .deleteIcon:hover {
-  
-  background-color: rgba(248, 248, 248, 0.842);
-  border-radius: 10px;
+  background: rgba(255, 82, 82, 0.8);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(255, 82, 82, 0.3);
+}
+
+/* 编辑模式样式 */
+.editContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.editInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.editInput:focus {
+  border-color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.editInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.editActions {
+  display: flex;
+  gap: 8px;
+}
+
+.saveIcon {
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(76, 175, 80, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.saveIcon:hover {
+  background: rgba(76, 175, 80, 0.9);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
+}
+
+.cancelIcon {
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 193, 7, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancelIcon:hover {
+  background: rgba(255, 193, 7, 0.9);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.4);
 }
 
 .header {
