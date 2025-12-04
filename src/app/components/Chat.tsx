@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { nanoid } from "nanoid";
 import { useChatStore } from "../stores/ChatMessage";
 import ReactMarkdown from "react-markdown";
+import gfm from 'remark-gfm';
 import LoadingIcon from "../icons/loading.svg";
 
 export default function Chat() {
@@ -118,7 +119,7 @@ export default function Chat() {
                             }
                         >
                             {message.content ? (
-                                <ReactMarkdown>{message.content}</ReactMarkdown>
+                                <ReactMarkdown remarkPlugins={[gfm]}>{message.content}</ReactMarkdown>
                             ) : null}
                         </div>
 

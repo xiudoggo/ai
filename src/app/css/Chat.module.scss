@@ -11,7 +11,7 @@
   padding: 15px 20px;
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .backButton {
@@ -23,7 +23,7 @@
   cursor: pointer;
   font-size: 14px;
   transition: all 0.3s ease;
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.3);
   }
@@ -50,23 +50,24 @@
   flex-direction: column;
   gap: 15px;
   background: #f0f4f8;
+
   &::-webkit-scrollbar {
-        width: 10px;
-    }
+    width: 10px;
+  }
 
-    &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.05);
-        border-radius: 4px;
-    }
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+  }
 
-    &::-webkit-scrollbar-thumb {
-        background: rgba(59, 95, 252, 0.435);
-        border-radius: 4px;
+  &::-webkit-scrollbar-thumb {
+    background: rgba(59, 95, 252, 0.435);
+    border-radius: 4px;
 
-        &:hover {
-            background: rgba(52, 88, 248, 0.74);
-        }
+    &:hover {
+      background: rgba(52, 88, 248, 0.74);
     }
+  }
 }
 
 .messageBubble {
@@ -78,7 +79,7 @@
   align-self: flex-end;
   background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
   color: white;
-  border-radius: 18px 18px 0 18px;
+  border-radius: 24px 24px 0 24px;
   padding: 12px 18px;
   max-width: 70%;
   word-wrap: break-word;
@@ -92,102 +93,96 @@
   align-self: flex-start;
   background: #ffffff;
   color: #333333;
-  border-radius: 18px 18px 18px 0;
-  padding: 12px 18px;
-  max-width: 70%;
+  border-radius: 30px 30px 30px 0;
+  padding: 8px 10px;
+  max-width: 98%;
   word-wrap: break-word;
-  /* 保留换行符并折行长文本 */
-  white-space: pre-wrap;
-  word-break: break-word;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+  /* 折行并保留换行符 */
+  white-space: pre-wrap; //折行
+  word-break: break-word; //换行
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); //阴影
   border: 1px solid #e6e9f0;
-  
+
   // Markdown元素样式
-  h1, h2, h3, h4, h5, h6 {
+  h1,h2,h3,h4,h5,h6 {
+    white-space: normal;
     margin-top: 0px;
     margin-bottom: 8px;
     font-weight: bold;
   }
   
+  
+  // 使用:has()伪类选择后面跟着ol元素的h标签
+  h1:has(+ol), h2:has(+ol), h3:has(+ol), h4:has(+ol), h5:has(+ol), h6:has(+ol) {
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
   h1 {
     font-size: 1.5em;
     border-bottom: 1px solid #eee;
     padding-bottom: 0.3em;
   }
-  
+
   h2 {
     font-size: 1.3em;
     border-bottom: 1px solid #eee;
     padding-bottom: 0.3em;
   }
-  
+
   h3 {
     font-size: 1.1em;
   }
   
+
   p {
     padding: 0;
-    margin: 0;
+    margin: 8px 0 0 0;
     line-height: 1.5;
   }
-  
+
+  p+ul{
+    margin:0px ;
+  }
   // 统一列表基础样式
   ul {
     padding-left: 25px;
     margin: 12px 0;
   }
-  
+
   ul li {
-    list-style-type: disc;
+    list-style-type: disc; //添加圆点
     margin-bottom: 8px;
     line-height: 1.5;
   }
-  
-  // 优化的有序列表样式
+
+  // 优化的嵌套有序列表样式
   ol {
-    padding-left: 40px; // 为数字背景预留足够空间
-    margin: 15px 0;
-    counter-reset: list-counter; // 重置计数器
+    white-space: normal;
+    list-style-type: none; //移除默认样式
+    padding: 0px 10px 10px 10px;
+    margin: 0;
   }
-  
+
   ol li {
-    position: relative;
-    margin-bottom: 12px; // 增加列表项间距
-    padding-left: 8px; // 文本与数字的间距
-    line-height: 1.6;
-    counter-increment: list-counter;
-    list-style-type: none;
-    padding-top: 2px; // 微调对齐
+    padding: 1px;
+    margin:1px;
   }
-  
-  ol li::before {
-    content: counter(list-counter);
-    position: absolute;
-    left: -35px;
-    top: 2px;
-    background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
-    color: white;
-    font-weight: bold;
-    font-size: 0.9em;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    flex-shrink: 0;
-  }
-  
+ li p{
+  position:static;
+ }
+
+
   a {
     color: #4361ee;
     text-decoration: none;
-    
+
     &:hover {
       text-decoration: underline;
     }
   }
-  
+
   blockquote {
     border-left: 3px solid #ddd;
     margin: 10px 0;
@@ -195,20 +190,20 @@
     color: #666;
     font-style: italic;
   }
-  
+
   // 代码块样式
   pre {
     background-color: #294472;
     border-radius: 8px;
     padding: 15px;
     overflow-x: auto;
-    margin: 15px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     color: #aed0ff;
     font-family: 'Courier New', monospace;
     font-size: 1em;
     line-height: 1.4;
-    
+
     code {
       background-color: transparent;
       padding: 0;
@@ -216,7 +211,7 @@
       color: inherit;
     }
   }
-  
+
   // 行内代码样式
   code {
     background-color: #c0d9f1;
@@ -226,25 +221,27 @@
     font-family: "JetBrains Mono";
     font-size: 0.95em;
   }
-  
+
   // 表格样式
   table {
-    border-collapse: collapse;
+    border-collapse: collapse; // 取消表格边框
     width: 100%;
-    margin: 15px 0;
-    
-    th, td {
+    margin-bottom: 10px;
+
+    th,
+    td {
       border: 1px solid #e2e8f0;
       padding: 8px 12px;
       text-align: left;
     }
-    
+
     th {
       background-color: #edf2f7;
       font-weight: bold;
     }
-    
+
     tr:nth-child(even) {
+      // 偶数行
       background-color: #f7fafc;
     }
   }
@@ -252,14 +249,13 @@
 
 // 新增loading容器样式
 .loadingContainer {
-  
   font-size: 20px;
-  color:#0080ff;
+  color: #0080ff;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
-  
+  padding: 15px 0;
+
   svg {
     width: 32px;
     height: 32px;
@@ -270,11 +266,11 @@
   display: flex;
   padding: 10px;
   padding-bottom: 0px;
-  
+
   background: #ffffff;
   border-top: 1px solid #e6e9f0;
   gap: 10px;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .textareaWrapper {
@@ -296,28 +292,29 @@
   overflow-y: auto; // 超出时显示滚动条
   width: 100%;
   box-sizing: border-box;
-  
+
   &:focus {
     border-color: #4361ee;
     box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
   }
+
   &::-webkit-scrollbar {
-        width: 10px;
-    }
+    width: 10px;
+  }
 
-    &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.05);
-        border-radius: 4px;
-    }
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+  }
 
-    &::-webkit-scrollbar-thumb {
-        background: rgba(59, 95, 252, 0.435);
-        border-radius: 4px;
+  &::-webkit-scrollbar-thumb {
+    background: rgba(59, 95, 252, 0.435);
+    border-radius: 4px;
 
-        &:hover {
-            background: rgba(52, 88, 248, 0.74);
-        }
+    &:hover {
+      background: rgba(52, 88, 248, 0.74);
     }
+  }
 }
 
 .characterCount {
@@ -340,12 +337,12 @@
   cursor: pointer;
   font-size: 16px;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
   }
-  
+
   &:active {
     transform: translateY(0);
   }

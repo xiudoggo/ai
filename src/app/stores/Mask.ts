@@ -21,6 +21,7 @@ export interface MaskState {
     getMasks: () => void;
     addMask: (add_name: string, add_description: string) => void;
     removeMask: (id: string) => void;
+    updateMask: (id: string, name: string, description: string) => void;
 }
 
 export const useMaskStore = create<MaskState>()(
@@ -83,13 +84,38 @@ export const useMaskStore = create<MaskState>()(
                     }).then((result) => {
                         if (result === "Deleted") {
                             console.log("Mask deleted successfully");
+                            set((state) => ({
+                                LocalMasks: state.LocalMasks.filter(mask => mask.id !== id),
+                            }))
                         } else {
                             console.error("Failed to delete mask");
                             return;
                         }
-                        set((state) => ({
-                            LocalMasks: state.LocalMasks.filter(mask => mask.id !== id),
-                        }))
+
+                    })
+            },
+            updateMask: (id: string, name: string, description: string) => {
+                const int_id: number = parseInt(id);
+                fetch(`http://localhost:8080/mask/update`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: int_id,
+                        name,
+                        description
+                    })
+                })
+                    .then((res) => res.text())
+                    .then((result) => {
+                        if (result === "Updated") {
+                            set((state) => ({
+                                LocalMasks: state.LocalMasks.map(m => m.id === id ? { ...m, name, description } : m)
+                            }));
+                        } else {
+                            console.error("Failed to update mask");
+                        }
                     })
             }
 
