@@ -62,7 +62,7 @@
 
   &::-webkit-scrollbar-thumb {
     background: rgba(59, 95, 252, 0.435);
-    border-radius: 4px;
+    border-radius: 4px 4px 4px 4px;
 
     &:hover {
       background: rgba(52, 88, 248, 0.74);
@@ -279,10 +279,11 @@
 }
 
 .messageInput {
+  font-family: "JetBrains Mono";
   flex: 1;
   border: 1px solid #d1d5db;
   border-radius: 24px;
-  padding: 12px 20px;
+  padding: 8px 12px;
   font-size: 16px;
   resize: none;
   outline: none;
@@ -304,7 +305,8 @@
 
   &::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
+    border-radius: 10px 10px 10px 10px;
+    
   }
 
   &::-webkit-scrollbar-thumb {
@@ -319,11 +321,10 @@
 
 .characterCount {
   position: absolute;
-  right: 15px;
-  bottom: 10px;
+  right: 12px;
+  bottom: -12px;
   font-size: 12px;
   color: #666;
-  background-color: rgba(255, 255, 255, 0.8);
   padding: 2px 6px;
   border-radius: 10px;
 }

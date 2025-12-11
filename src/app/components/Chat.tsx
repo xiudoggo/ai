@@ -15,7 +15,7 @@ export default function Chat() {
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const { submitMessage } = useChatStore();
     // 字符限制
-    const MAX_CHARACTERS = 2000;
+    const MAX_CHARACTERS = 20000;
 
     // 获取当前会话
     const currentSession = LocalSessions.find(session => session.id === currentSessionId);
