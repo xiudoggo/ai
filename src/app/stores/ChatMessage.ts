@@ -23,7 +23,7 @@ const { addMessage } = useSessionStore.getState();
 export interface ChatStore {
     AI_returned_message: ChatMessage;
     submitMessage: (message: ChatMessage) => Promise<void>;
-    //GetandProcessMessage: () => {};
+
 }
 
 export const useChatStore = create<ChatStore>()(
@@ -43,13 +43,14 @@ export const useChatStore = create<ChatStore>()(
                 const currentSession = LocalSessions.find((s) => s.id === currentSessionId);
                 const systemMessage = currentSession?.mask?.description ?? "You are a helpful assistant.";
 
-                return fetch(process.env.NEXT_PUBLIC_AI_API_URL + "/chat/completions", {
+                return fetch("/api/chat", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer " + process.env.NEXT_PUBLIC_USER_KEY,
                     },
                     body: JSON.stringify({
+                        apiKey: process.env.NEXT_PUBLIC_USER_KEY,
+                        apiUrl: process.env.NEXT_PUBLIC_AI_API_URL,
                         model: "deepseek-chat",
                         messages: [
                             {
